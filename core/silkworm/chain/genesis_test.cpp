@@ -62,6 +62,15 @@ TEST_CASE("genesis config") {
     REQUIRE(config.has_value());
     CHECK(config.value() == kSepoliaConfig);
 
+    genesis_data = read_genesis_data(static_cast<uint32_t>(kStormConfig.chain_id));
+    genesis_json = nlohmann::json::parse(genesis_data, nullptr, /* allow_exceptions = */ false);
+    CHECK_FALSE(genesis_json.is_discarded());
+
+    CHECK((genesis_json.contains("config") && genesis_json["config"].is_object()));
+    config = ChainConfig::from_json(genesis_json["config"]);
+    REQUIRE(config.has_value());
+    CHECK(config.value() == kStormConfig);
+
     genesis_data = read_genesis_data(1'000u);
     genesis_json = nlohmann::json::parse(genesis_data, nullptr, /* allow_exceptions = */ false);
     CHECK(genesis_json.is_discarded());
@@ -156,6 +165,21 @@ TEST_CASE("Sepolia genesis") {
     nlohmann::json genesis_json = sanity_checked_json(kSepoliaConfig.chain_id);
     CHECK(genesis_json["extraData"] == "Sepolia, Athens, Attica, Greece!");
 
+    auto expected_state_root{0x5eb6e371a698b8d68f665192350ffcecbbbf322916f4b51bd79bb6887da3f494_bytes32};
+    auto actual_state_root{state_root(genesis_json)};
+    CHECK(to_hex(expected_state_root) == to_hex(actual_state_root));
+
+    BlockHeader header{read_genesis_header(genesis_json, actual_state_root)};
+    auto computed_hash{header.hash()};
+    CHECK(to_hex(computed_hash) == to_hex(kSepoliaGenesisHash));
+}
+
+// https://storm.etherscan.io/block/0
+TEST_CASE("Storm genesis") {
+    nlohmann::json genesis_json = sanity_checked_json(kSepoliaConfig.chain_id);
+//    CHECK(genesis_json["extraData"] == "Sepolia, Athens, Attica, Greece!");
+
+    // TODO
     auto expected_state_root{0x5eb6e371a698b8d68f665192350ffcecbbbf322916f4b51bd79bb6887da3f494_bytes32};
     auto actual_state_root{state_root(genesis_json)};
     CHECK(to_hex(expected_state_root) == to_hex(actual_state_root));

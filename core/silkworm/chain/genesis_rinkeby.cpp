@@ -1,4 +1,4 @@
-/* Generated from D:\GitHub\silkworm\db\silkworm\common\genesis_rinkeby.json using silkworm's genesistool*/
+/* Generated from C:\Users\Wesley\Documents\silkworm\core\silkworm\chain\genesis_rinkeby.json using silkworm's genesistool*/
 #include <stddef.h>
 static const char genesis_rinkeby_data_internal[] = {
 0x7b, 0x22, 0x61, 0x6c, 0x6c, 0x6f, 0x63, 0x22, 0x3a, 0x7b, 0x22, 0x30, 0x30, 0x30, 0x30, 0x30,

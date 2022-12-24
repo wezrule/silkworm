@@ -218,6 +218,28 @@ inline constexpr ChainConfig kSepoliaConfig{
     .terminal_total_difficulty = 17000000000000000,
 };
 
+// TODO
+inline constexpr evmc::bytes32 kStormGenesisHash{0x25a5cc106eea7138acab33231d7160d69cb777ee0c2c553fcddf5138993e6dd9_bytes32};
+inline constexpr ChainConfig kStormConfig{
+    .chain_id = 43210,
+    .seal_engine = SealEngineType::kEthash,
+    .evmc_fork_blocks =
+        {
+            0,        // Homestead
+            0,        // Tangerine Whistle
+            0,        // Spurious Dragon
+            0,        // Byzantium
+            0,        // Constantinople
+            0,        // Petersburg
+            0,        // Istanbul
+            0,        // Berlin
+            0,        // London
+            0,        // Merge Netsplit
+        },
+    .muir_glacier_block = 0,
+    .terminal_total_difficulty = 17000000000000000,
+};
+
 //! \brief Looks up a known chain config provided its chain ID
 std::optional<std::pair<const std::string, const ChainConfig*>> lookup_known_chain(uint64_t chain_id) noexcept;
 

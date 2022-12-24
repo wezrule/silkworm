@@ -55,6 +55,12 @@ namespace db {
             REQUIRE(db::initialize_genesis(txn, genesis_json, /*allow_exceptions=*/false));
             CHECK(db::read_chain_config(txn) == silkworm::kSepoliaConfig);
         }
+        SECTION("Initialize with Storm") {
+            auto source_data{silkworm::read_genesis_data(silkworm::kStormConfig.chain_id)};
+            auto genesis_json = nlohmann::json::parse(source_data, nullptr, /*allow_exceptions=*/false);
+            REQUIRE(db::initialize_genesis(txn, genesis_json, /*allow_exceptions=*/false));
+            CHECK(db::read_chain_config(txn) == silkworm::kStormConfig);
+        }
 
         SECTION("Initialize with invalid Json") {
             std::string source_data{"{chainId="};

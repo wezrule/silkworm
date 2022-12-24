@@ -37,6 +37,9 @@ extern size_t sizeof_genesis_rinkeby_data();
 extern const char* genesis_sepolia_data();
 extern size_t sizeof_genesis_sepolia_data();
 
+extern const char* genesis_storm_data();
+extern size_t sizeof_genesis_storm_data();
+
 namespace silkworm {
 
 std::string read_genesis_data(uint64_t chain_id) {
@@ -53,6 +56,9 @@ std::string read_genesis_data(uint64_t chain_id) {
         case kSepoliaConfig.chain_id:
             assert(sizeof_genesis_sepolia_data() != 0);
             return std::string(genesis_sepolia_data(), sizeof_genesis_sepolia_data());
+        case kStormConfig.chain_id:
+            assert(sizeof_genesis_storm_data() != 0);
+            return std::string(genesis_storm_data(), sizeof_genesis_storm_data());
         default:
             return "{";  // <- Won't be lately parsed as valid json value
     }

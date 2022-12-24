@@ -263,6 +263,30 @@ TEST_CASE("terminalTotalDifficulty as JSON number (Erigon compatibility)") {
     CHECK(config3 == kSepoliaConfig);
     CHECK(config3->to_json() != sepolia_json_ttd_number);  // "17000000000000000" vs 17000000000000000
     CHECK(config3->terminal_total_difficulty == intx::from_string<intx::uint256>("17000000000000000"));
+
+    const auto storm_json_ttd_number = nlohmann::json::parse(R"({
+            "chainId":43210,
+            "homesteadBlock":0,
+            "eip150Block":0,
+            "eip155Block":0,
+            "byzantiumBlock":0,
+            "constantinopleBlock":0,
+            "petersburgBlock":0,
+            "istanbulBlock":0,
+            "muirGlacierBlock":0,
+            "berlinBlock":0,
+            "londonBlock":0,
+            "terminalTotalDifficulty":17000000000000000,
+            "mergeNetsplitBlock":0,
+            "ethash":{}
+        })");
+
+    const std::optional<ChainConfig> config4{ChainConfig::from_json(storm_json_ttd_number)};
+
+    REQUIRE(config4);
+    CHECK(config4 == kStormConfig);
+    CHECK(config4->to_json() != storm_json_ttd_number);  // "17000000000000000" vs 17000000000000000
+    CHECK(config4->terminal_total_difficulty == intx::from_string<intx::uint256>("17000000000000000"));
 }
 
 }  // namespace silkworm

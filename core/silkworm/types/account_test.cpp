@@ -24,6 +24,11 @@ namespace silkworm {
 
 TEST_CASE("Decode account from storage") {
     SECTION("Correct payload") {
+        // So it's bitset, then:
+        // num bytes, nonce (01 02)
+        // num bytes, balance (02 03e8)
+        // num bytes, incarnation (01 05)
+        // num bytes, codehash (0x20 f188..)
         Bytes encoded{*from_hex("0f01020203e8010520f1885eda54b7a053318cd41e2093220dab15d65381b1157a3633a83bfd5c9239")};
         auto [decoded, err]{Account::from_encoded_storage(encoded)};
         REQUIRE(err == DecodingResult::kOk);
