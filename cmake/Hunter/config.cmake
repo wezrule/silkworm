@@ -27,6 +27,7 @@ hunter_cmake_args(
 
 hunter_config(
   abseil
+  VERSION 20200225.2
   CMAKE_ARGS _HAS_DEPRECATED_RESULT_OF
 )
 
