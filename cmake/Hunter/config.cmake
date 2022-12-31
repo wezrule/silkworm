@@ -25,6 +25,11 @@ hunter_cmake_args(
         _HAS_DEPRECATED_RESULT_OF=1
 )
 
+hunter_config(
+  abseil
+  CMAKE_ARGS _HAS_DEPRECATED_RESULT_OF
+)
+
 # Avoid -Werror to overcome GCC 12.1.0 bug breaking Google Benchmark build
 # https://github.com/google/benchmark/issues/1398
 # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=105329
