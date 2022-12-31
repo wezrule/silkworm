@@ -28,7 +28,7 @@ hunter_cmake_args(
 hunter_config(
   abseil
   VERSION 20200225.2
-  CMAKE_ARGS _HAS_DEPRECATED_RESULT_OF
+  CMAKE_ARGS _HAS_DEPRECATED_RESULT_OF=1
 )
 
 # Avoid -Werror to overcome GCC 12.1.0 bug breaking Google Benchmark build
