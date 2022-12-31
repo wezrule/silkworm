@@ -22,6 +22,7 @@ hunter_cmake_args(
         ABSL_PROPAGATE_CXX_STD=ON
         ABSL_ENABLE_INSTALL=OFF
         ABSL_RUN_TESTS=OFF
+        -D_HAS_DEPRECATED_RESULT_OF=1
 )
 
 # Avoid -Werror to overcome GCC 12.1.0 bug breaking Google Benchmark build
