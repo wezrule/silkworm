@@ -29,7 +29,7 @@ hunter_cmake_args(
 # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=105329
 hunter_config(
   benchmark
-  VERSION 1.6.1
+  VERSION 1.7.0
   CMAKE_ARGS BENCHMARK_ENABLE_WERROR=OFF
 )
 
